@@ -1,18 +1,16 @@
-from selenium import webdriver
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 import json
 import datetime
 
 def hello(event, context):
-  driver = webdriver.PhantomJS(os.environ['phantomjs_loc'])
   result = []
   page_num = 1
   loop_flag = True
 
   while loop_flag:
-    driver.get("http://gall.dcinside.com/board/lists?id=skwyverns&page=" + str(page_num))
-    html = driver.page_source
+    html = urlopen("http://gall.dcinside.com/board/lists?id=skwyverns&page=" + str(page_num))
     soup = BeautifulSoup(html, 'html.parser')
 
     gall_nums = soup.select('.gall_num')
