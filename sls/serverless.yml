@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: python3.6
   region: ap-northeast-2
+  timeout: 300
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -19,3 +20,10 @@ provider:
 functions:
   crawler_sk_wyverns_gallery:
     handler: handler.crawler_sk_wyverns_gallery
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
