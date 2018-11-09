@@ -1,7 +1,5 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import os
-import json
 import datetime
 import boto3
 
@@ -30,6 +28,7 @@ def crawler_sk_wyverns_gallery(event, context):
         gall_date = gall_dates[idx]['title']
         if (datetime.datetime(int(gall_date[0:4]), int(gall_date[5:7]), int(gall_date[8:10]), int(gall_date[11:13]), int(gall_date[14:16]), int(gall_date[17:19])) 
           < datetime.datetime(2018, 11, 2, 23, 23, 59)):
+          print('end point')
           loop_flag = False
         else:
           if (loop_flag):
@@ -71,13 +70,11 @@ def crawler_sk_wyverns_gallery(event, context):
     
     page_num += 1
 
-  body = {
-    "message": "Function executed successfully!",
-  }
-
   response = {
     "statusCode": 200,
-    "body": json.dumps(body),
+    "body": {
+      "Function executed successfully!"
+    },
   }
 
   return response
