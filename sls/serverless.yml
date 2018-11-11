@@ -21,7 +21,11 @@ functions:
   crawler_sk_wyverns_gallery:
     handler: handler.crawler_sk_wyverns_gallery
     events:
-      - schedule: rate(3 hours)
+      - schedule: rate(1 hour)
+  crawler_doosan_bears_gallery:
+    handler: handler.crawler_doosan_bears_gallery
+    events:
+      - schedule: rate(1 hour)
 
 plugins:
   - serverless-python-requirements
