@@ -20,12 +20,14 @@ provider:
 functions:
   crawler_sk_wyverns_gallery:
     handler: handler.crawler_sk_wyverns_gallery
-    events:
-      - schedule: rate(1 hour)
+    # events:
+    #   - schedule: rate(1 hour)
   crawler_doosan_bears_gallery:
     handler: handler.crawler_doosan_bears_gallery
-    events:
-      - schedule: rate(1 hour)
+    # events:
+    #   - schedule: rate(1 hour)
+  crawler_zum_news:
+    handler: handler.crawler_zum_news 
 
 plugins:
   - serverless-python-requirements

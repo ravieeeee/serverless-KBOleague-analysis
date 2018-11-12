@@ -146,8 +146,8 @@ def crawler_doosan_bears_gallery(event, context):
                 return e
             else:
               duplication += 1
-              # if (duplication == 20):
-                # return "latest updated"
+              if (duplication == 20):
+                return "latest updated"
               print('중복 data : doosang' + gall_num)
     
     page_num += 1
@@ -160,3 +160,68 @@ def crawler_doosan_bears_gallery(event, context):
   }
 
   return response
+
+def crawler_zum_news(event, context):
+  page_num = 15
+  date_num = datetime.datetime.today().strftime('%Y%m%d')
+  # date_num = '20181112'
+
+  while True:
+    html = urlopen("http://news.zum.com/list?c=05&sc=38&d=" + str(date_num) + "&p=" + str(page_num))
+    soup = BeautifulSoup(html, 'html.parser')
+
+    links = []
+
+    a_tags = soup.select('.newest1 > div > .news > li > .txt > .title > a')
+    print('page ' + str(page_num))
+    for a_tag in a_tags:
+      links.append(a_tag['href'][10:])
+    if (len(a_tags) == 0):
+      return 'end'
+    
+    for link in links:
+      html_news = urlopen("http://news.zum.com/articles/" + link)
+      soup_news = BeautifulSoup(html_news, 'html.parser')
+      
+      title = soup_news.find(id = 'article').find('h2')
+      date = soup_news.find(class_ = 'sponsor').find(class_ = 'date')
+      content = soup_news.find(class_ = 'article_body')
+      
+      unwanted_content = content.find('a')
+      while unwanted_content is not None:
+        unwanted_content.extract()
+        unwanted_content = content.find('a')
+
+      news_id = link.find("?")
+      
+      try:
+        dynamodb.put_item(
+          TableName = 'kbo-data',
+          Item = {
+            'id': {
+              'S': 'zumnews' + link[:news_id]
+            },
+            'dsrc': {
+              'S': 'zumnews'
+            },
+            'num': {
+              'S': link[:news_id]
+            },
+            'title': {
+              'S': title.get_text()
+            },
+            'date': {
+              'S': date.get_text()
+            },
+            'content': {
+              'S': content.get_text().strip()
+            }
+          }
+        )
+        print('zumnews' + link[:news_id] + ' 데이터 저장')
+      except Exception as e:
+        return e
+      
+    page_num += 1
+
+    return 'Function executed successfully!'
