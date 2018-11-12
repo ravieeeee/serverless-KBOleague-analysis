@@ -7,6 +7,7 @@ dynamodb = boto3.client('dynamodb')
 
 def crawler_sk_wyverns_gallery(event, context):
   page_num = 1
+  duplication = 0
   loop_flag = True
 
   while loop_flag:
@@ -66,6 +67,9 @@ def crawler_sk_wyverns_gallery(event, context):
               except Exception as e:
                 return e
             else:
+              duplication += 1
+              if (duplication == 20):
+                return "latest updated"
               print('중복 data : skg' + gall_num)
     
     page_num += 1
@@ -81,6 +85,7 @@ def crawler_sk_wyverns_gallery(event, context):
 
 def crawler_doosan_bears_gallery(event, context):
   page_num = 1
+  duplication = 0
   loop_flag = True
 
   while loop_flag:
@@ -140,6 +145,9 @@ def crawler_doosan_bears_gallery(event, context):
               except Exception as e:
                 return e
             else:
+              duplication += 1
+              # if (duplication == 20):
+                # return "latest updated"
               print('중복 data : doosang' + gall_num)
     
     page_num += 1
