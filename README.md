@@ -4,7 +4,7 @@
 * serverless
   * lambda function 내 module을 import 못하는 에러
     * [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements)로 해결
-      * requirements.txt 내에 module들을 선언 -> 자동으로 환경 만들어줌
+      * `requirements.txt` 내에 module들을 선언 -> 자동으로 환경 만들어줌
       * dockerize도 함(deploy시 local에 docker가 도는 상태여야 함)
     * 참고
       * [Serverless: Python - virtualenv - { "errorMessage": "Unable to import module 'handler'" }](https://markhneedham.com/blog/2017/08/06/serverless-python-virtualenv-errormessage-unable-import-module-handler/)
@@ -16,22 +16,47 @@
       * [Unprotected Private Key File Error](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key)
     * [FoxyProxy](https://chrome.google.com/webstore/detail/foxyproxy-standard/gcknhkkoolaabfmlnjonogaaifnjlfnp?hl=ko) 설치 후, 관련 [설정](https://docs.aws.amazon.com/ko_kr/emr/latest/ManagementGuide/emr-connect-master-node-proxy.html#emr-connect-foxy-proxy-chrome)
   * Zeppelin에서 코드 실행시, java.net.ConnectException: Connection refused (Connection refused) 발생
-    * Interpreter 설정이 제대로 안되어있는 문제(EC2에 당연히 Interpreter가 깔려있다고 생각했다)
+    * Interpreter 설정이 제대로 안되어있는 문제(EC2에 당연히 Interpreter가 깔려있다고 생각했다..)
       * [anaconda](https://www.anaconda.com/) 설치
-        * 참고
-          * [EC2 인스턴스에 anaconda 설치](https://hackernoon.com/aws-ec2-part-3-installing-anaconda-on-ec2-linux-ubuntu-dbef0835818a)
-          * [Spark Cluster 구축하기](https://dziganto.github.io/amazon%20emr/apache%20spark/apache%20zeppelin/big%20data/From-Zero-to-Spark-Cluster-in-Under-Ten-Minutes/)
+        * [EC2 인스턴스에 anaconda 설치](https://hackernoon.com/aws-ec2-part-3-installing-anaconda-on-ec2-linux-ubuntu-dbef0835818a)
+        * [Spark Cluster 구축하기](https://dziganto.github.io/amazon%20emr/apache%20spark/apache%20zeppelin/big%20data/From-Zero-to-Spark-Cluster-in-Under-Ten-Minutes/)
         * 과정
-          * wget https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh
+          * ssh 접속
+          * `wget https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh`
             * [Anaconda installer archive](https://repo.continuum.io/archive/index.html)
-          * bash ~/anaconda.sh -b -p $HOME/anaconda
-          * echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc
-  *	ec2 인스턴스 ssh 접속시 간헐적으로 connection이 매우 느린 현상
+          * `bash ~/anaconda.sh -b -p $HOME/anaconda`
+          * `echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc`
+          * `which python`으로 경로 확인
+          * zeppelin 내 interpreter 설정에서 python의 `zeppelin.python`과 `zeppelin.pyspark.python`의 value를 `/home/hadoop/anaconda/bin/python`로 변경
+          * python package 설치는 `conda install package-name`
+  * Zeppelin의 notebook이 cluster 재실행 시 날아감
+    * S3에 json으로 저장
+      * cluster 생성 시, 다음 configuration 입력
+      ```
+      [
+        {
+          "Classification": "zeppelin-env",
+          "Properties": {},
+          "Configurations": [
+            {
+              "Classification": "export",
+              "Properties": {
+                "ZEPPELIN_NOTEBOOK_STORAGE": "org.apache.zeppelin.notebook.repo.S3NotebookRepo",
+                "ZEPPELIN_NOTEBOOK_S3_BUCKET": "s3-bucket-name",
+                "ZEPPELIN_NOTEBOOK_S3_USER": "user-name"
+              },
+              "Configurations": []
+            }
+          ]
+        }
+      ]
+      ```
+      * 새 클러스터 생성시 기존 노트북 자동 로드
 
 ## Retrospect
-* 크롤링 결과를 dynamodb에 넣은 것
-  * dynamo는 Availability를 보장하는데, 이 프로젝트에는 그런 real-time을 보장받기 보다는 S3를 쓰는 것이 더 효율적이었을 것이다.
-  *  [AWS Glue와 S3를 이용한 아키텍쳐 사례](https://aws.amazon.com/blogs/big-data/build-a-data-lake-foundation-with-aws-glue-and-amazon-s3/)
-  * 이외에도 보통 이런 목적에는 S3를 많이 쓰는 사례를 많이 찾아볼 수 있다.
-* serverless 배포시 python 가상 환경
-  * 프로젝트용 가상 환경을 만들지 않았더니 requirements.txt 내에 local의 모든 파이썬 패키지가 들어감
+* 크롤링 결과를 S3가 아니라 dynamodb에 넣은 것
+  * dynamo는 Availability를 보장하는데, 이 프로젝트에는 그런 real-time을 보장받기 보다는 S3를 쓰는 것이 더 목적에 부합한다.
+    *  [AWS Glue와 S3를 이용한 아키텍쳐 사례](https://aws.amazon.com/blogs/big-data/build-a-data-lake-foundation-with-aws-glue-and-amazon-s3/)
+    * 이외에도 보통 이런 목적에는 S3를 많이 쓰는 사례를 많이 찾아볼 수 있다.
+* serverless 배포시 python 가상 환경 설정 안함
+  * 프로젝트용 가상 환경을 만들지 않았더니 `requirements.txt` 내에 local의 모든 파이썬 패키지가 들어감
