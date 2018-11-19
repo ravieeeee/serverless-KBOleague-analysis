@@ -15,7 +15,7 @@
       * EC2 마스터 노드의 security rule에 22번 포트로 접근하는 ssh 액세스 허용 규칙이 없는 경우, [추가](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html)
       * [Unprotected Private Key File Error](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#troubleshoot-unprotected-key)
     * [FoxyProxy](https://chrome.google.com/webstore/detail/foxyproxy-standard/gcknhkkoolaabfmlnjonogaaifnjlfnp?hl=ko) 설치 후, 관련 [설정](https://docs.aws.amazon.com/ko_kr/emr/latest/ManagementGuide/emr-connect-master-node-proxy.html#emr-connect-foxy-proxy-chrome)
-  * Zeppelin에서 코드 실행시, –	java.net.ConnectException: Connection refused (Connection refused) 발생
+  * Zeppelin에서 코드 실행시, java.net.ConnectException: Connection refused (Connection refused) 발생
     * Interpreter 설정이 제대로 안되어있는 문제(EC2에 당연히 Interpreter가 깔려있다고 생각했다)
       * [anaconda](https://www.anaconda.com/) 설치
         * 참고
@@ -23,6 +23,7 @@
           * [Spark Cluster 구축하기](https://dziganto.github.io/amazon%20emr/apache%20spark/apache%20zeppelin/big%20data/From-Zero-to-Spark-Cluster-in-Under-Ten-Minutes/)
         * 과정
           * wget https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh
+            * [Anaconda installer archive](https://repo.continuum.io/archive/index.html)
           * bash ~/anaconda.sh -b -p $HOME/anaconda
           * echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc
   *	ec2 인스턴스 ssh 접속시 간헐적으로 connection이 매우 느린 현상
