@@ -1,10 +1,6 @@
 ## Architecture
----
-
-<br>
 
 ## Trouble Shooting
----
 * serverless
   * lambda function 내 module을 import 못하는 에러
     * [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements)로 해결
@@ -31,10 +27,7 @@
           * echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc
   *	ec2 인스턴스 ssh 접속시 간헐적으로 connection이 매우 느린 현상
 
-<br>
-
 ## Retrospect
----
 * 크롤링 결과를 dynamodb에 넣은 것
   * dynamo는 Availability를 보장하는데, 이 프로젝트에는 그런 real-time을 보장받기 보다는 S3를 쓰는 것이 더 효율적이었을 것이다.
   *  [AWS Glue와 S3를 이용한 아키텍쳐 사례](https://aws.amazon.com/blogs/big-data/build-a-data-lake-foundation-with-aws-glue-and-amazon-s3/)
