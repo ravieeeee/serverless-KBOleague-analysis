@@ -4,7 +4,7 @@
 * serverless
   * lambda function 내 module을 import 못하는 에러
     * [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements)로 해결
-      * `requirements.txt` 내에 module들을 선언 -> 자동으로 환경 만들어줌
+      * `requirements.txt` 내에 사용할 module들을 선언 -> 해당 환경 만들어줌
       * dockerize도 함(deploy시 local에 docker가 도는 상태여야 함)
     * 참고
       * [Serverless: Python - virtualenv - { "errorMessage": "Unable to import module 'handler'" }](https://markhneedham.com/blog/2017/08/06/serverless-python-virtualenv-errormessage-unable-import-module-handler/)
@@ -22,13 +22,25 @@
         * [Spark Cluster 구축하기](https://dziganto.github.io/amazon%20emr/apache%20spark/apache%20zeppelin/big%20data/From-Zero-to-Spark-Cluster-in-Under-Ten-Minutes/)
         * 과정
           * ssh 접속
-          * `wget https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh`
-            * [Anaconda installer archive](https://repo.continuum.io/archive/index.html)
-          * `bash ~/anaconda.sh -b -p $HOME/anaconda`
-          * `echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc`
-          * `which python`으로 경로 확인
+          ```
+          // Anaconda installer archive(https://repo.continuum.io/archive/index.html)
+          wget https://repo.continuum.io/archive/Anaconda2-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh
+
+          bash ~/anaconda.sh -b -p $HOME/anaconda
+
+          echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc
+
+          // 경로 확인
+          which python
+          ```
           * zeppelin 내 interpreter 설정에서 python의 `zeppelin.python`과 `zeppelin.pyspark.python`의 value를 `/home/hadoop/anaconda/bin/python`로 변경
-          * python package 설치는 `conda install package-name`
+        * python package 설치는 `conda install package-name`
+        * EMR 클러스터를 다시 올릴 때마다, EC2 인스턴스 자체가 새로 올라가므로 매번 위의 과정을 해줘야하는데 귀찮으니 자동화하자
+          * EMR 클러스터 생성시, bootstrap 옵션에 사용자 지정 옵션을 줄 수 있다.
+          * s3내에 위의 명령어들이 있는 `.sh` 파일을 업로드한 후, 해당 파일로 지정하자.
+          * 클러스터를 생성할 때 마다 bootstrap action을 수행하는 자동 구성 단계를 거쳐준다.
+          * 참고
+            * [Amazon EMR - From Anaconda To Zeppelin](https://dziganto.github.io/zeppelin/spark/zeppelinhub/emr/anaconda/tensorflow/shiro/s3/theano/bootstrap%20script/EMR-From-Scratch/)
   * Zeppelin의 notebook이 cluster 재실행 시 날아감
     * S3에 json으로 저장
       * cluster 생성 시, 다음 configuration 입력
@@ -51,7 +63,7 @@
         }
       ]
       ```
-      * 새 클러스터 생성시 기존 노트북 자동 로드
+      * 새 클러스터 생성시 기존 노트북을 S3에서 로드하게 된다.
 
 ## Retrospect
 * 크롤링 결과를 S3가 아니라 dynamodb에 넣은 것
