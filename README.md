@@ -35,6 +35,7 @@
           ```
           * zeppelin 내 interpreter 설정에서 python의 `zeppelin.python`과 `zeppelin.pyspark.python`의 value를 `/home/hadoop/anaconda/bin/python`로 변경
         * python package 설치는 `conda install package-name`
+          * anaconda가 지원하지 않는 패키지는 `pip`로 설치
         * EMR 클러스터를 다시 올릴 때마다, EC2 인스턴스 자체가 새로 올라가므로 매번 위의 과정을 해줘야하는데 귀찮으니 자동화하자
           * EMR 클러스터 생성시, bootstrap 옵션에 사용자 지정 옵션을 줄 수 있다.
           * s3내에 위의 명령어들이 있는 `.sh` 파일을 업로드한 후, 해당 파일로 지정하자.
