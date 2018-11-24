@@ -2,6 +2,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import datetime
 import boto3
+from twitterscraper import query_tweets
 
 dynamodb = boto3.client('dynamodb')
 
@@ -225,3 +226,57 @@ def crawler_zum_news(event, context):
     page_num += 1
 
     return 'Function executed successfully!'
+
+def crawler_twitter(event, context):
+  limit = 19
+
+  while True:
+    try:
+      # sk와이번스, 두산베어스, 두산, sk, 한국시리즈, 코시, 어우두, 어차피 우승은 두산, 크보, 슼두전, kbo, 힐만, 김태형, 범죄두, 슼, 프로야구, 야구
+      query = ''
+      tweets = query_tweets(query = query, limit = limit, begindate = datetime.date(2018,11,3), enddate = datetime.date(2018,11,13), lang = 'ko', poolsize = 1)
+    except Exception as e:
+      print(e)
+      return
+    print('length : ' + str(len(tweets)))
+
+    for tweet in tweets:
+      try:
+        response = dynamodb.get_item(
+          TableName = 'kbo-data',
+          Key = {
+            'id': {
+              'S': 'twitter' + tweet.id.strip()
+            }
+          }
+        )
+        if ('Item' not in response):
+          dynamodb.put_item(
+            TableName = 'kbo-data',
+            Item = {
+              'id': {
+                'S': 'twitter' + tweet.id.strip()
+              },
+              'dsrc': {
+                'S': 'twitter'
+              },
+              'num': {
+                'S': tweet.id.strip()
+              },
+              'tweet': {
+                'S': tweet.text.strip()
+              },
+              'date': {
+                'S': str(tweet.timestamp).strip()
+              },
+            }
+          )
+          print('twitter' + tweet.id.strip() + ' 데이터 저장')
+        else:
+          print('twitter' + tweet.id.strip() + ' 중복 데이터')
+      except Exception as e:
+        return e
+    print('length : ' + str(len(tweets)) + ', limit :' + str(limit))
+    limit += 20
+
+  return 'Function executed successfully!'

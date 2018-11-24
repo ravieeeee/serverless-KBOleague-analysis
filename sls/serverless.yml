@@ -27,7 +27,9 @@ functions:
     # events:
     #   - schedule: rate(1 hour)
   crawler_zum_news:
-    handler: handler.crawler_zum_news 
+    handler: handler.crawler_zum_news
+  crawler_twitter:
+    handler: handler.crawler_twitter 
 
 plugins:
   - serverless-python-requirements
