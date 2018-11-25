@@ -3,4 +3,5 @@ bash ~/anaconda.sh -b -p $HOME/anaconda
 echo -e '\nexport PATH=$HOME/anaconda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc
 
 conda install -y pyspark
+conda install -y boto3
 pip install konlpy
