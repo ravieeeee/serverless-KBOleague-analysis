@@ -1,14 +1,17 @@
 ## Architecture
 
 ## Trouble Shooting
-* serverless
+### serverless
   * lambda function 내 module을 import 못하는 에러
     * [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements)로 해결
       * `requirements.txt` 내에 사용할 module들을 선언 -> 해당 환경 만들어줌
       * dockerize도 함(deploy시 local에 docker가 도는 상태여야 함)
     * 참고
       * [Serverless: Python - virtualenv - { "errorMessage": "Unable to import module 'handler'" }](https://markhneedham.com/blog/2017/08/06/serverless-python-virtualenv-errormessage-unable-import-module-handler/)
-* EMR
+  * no module name: konlpy
+    * [이슈](https://github.com/konlpy/konlpy/issues/71)를 보니 konlpy의 dependency인 Jpype가 문제가 있어서 람다가 안 돈다.
+      * Jpype, Jpype1-py3, numpy 다 줘도 konlpy를 못찾는다 ^^.....
+### EMR
   * 웹 연결 활성화(Amazon EMR 클러스터에 설치되는 애플리케이션은 마스터 노드에 호스팅된 웹 사이트로 사용자 인터페이스를 게시)를 위해 마스터 노드(EC2 인스턴스)에 대한 SSH 터널 열기 & 프록시 관리 도구 구성이 필요
     * EC2 key pair가 필요
     * 이 key pair는 EMR cluster 생성 시 필요하다
@@ -65,6 +68,11 @@
       ]
       ```
       * 새 클러스터 생성시 기존 노트북을 S3에서 로드하게 된다.
+### Spark
+    * SparkSession object 생성시 java.io.FileNotFoundException: /stderr (Permission denied) 발생
+      * EMR 버전을 5.18.0 밑으로 낮추면 된다
+      * [참고](https://stackoverflow.com/questions/53140852/cant-get-a-sparkcontext-in-new-aws-emr-cluster)
+
 
 ## Retrospect
 * 크롤링 결과를 S3가 아니라 dynamodb에 넣은 것
