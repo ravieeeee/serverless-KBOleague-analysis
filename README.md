@@ -69,9 +69,14 @@
       ```
       * 새 클러스터 생성시 기존 노트북을 S3에서 로드하게 된다.
 ### Spark
-    * SparkSession object 생성시 java.io.FileNotFoundException: /stderr (Permission denied) 발생
-      * EMR 버전을 5.18.0 밑으로 낮추면 된다
-      * [참고](https://stackoverflow.com/questions/53140852/cant-get-a-sparkcontext-in-new-aws-emr-cluster)
+  * SparkSession object 생성시 java.io.FileNotFoundException: /stderr (Permission denied) 발생
+    * EMR 버전을 5.18.0 밑으로 낮추면 된다
+    * [참고](https://stackoverflow.com/questions/53140852/cant-get-a-sparkcontext-in-new-aws-emr-cluster)
+### Kinesis
+  * 중간에 data transform시, [return 형식](https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/data-transformation.html)이 있다.
+  * 그 중 recordId는 publish 한 쪽에서 온 recordId와 transform 후 return할 해당 record의 recordId가 같아야한다.
+    * 이 recordId가 내가 직접 준 id값이라는 생각에 잡혀가지고 엄청난 삽질을 했다..
+    * 넘어온 event의 records를 찍어보면 내가 지정한 id가 아닌, record마다 recordId를 부여해서 넘어오는 것을 볼 수 있다.
 
 
 ## Retrospect
