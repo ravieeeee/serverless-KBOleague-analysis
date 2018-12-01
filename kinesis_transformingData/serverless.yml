@@ -1,0 +1,15 @@
+service: aws-python3 # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: ap-northeast-2
+  timeout: 300
+
+functions:
+  nlp_kbo_data:
+    handler: handler.nlp_kbo_data
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
