@@ -1,4 +1,5 @@
 ## Architecture
+![Structure](assets/structure.png)
 
 ## Trouble Shooting
 ### serverless
