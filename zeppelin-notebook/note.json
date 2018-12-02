@@ -1,0 +1,358 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\nfrom pyspark.sql import SparkSession\nfrom pyspark import SparkContext\n\nspark \u003d SparkSession.builder.appName(\"kbo\").getOrCreate()\nsc \u003d spark.sparkContext\n\nprefix \u003d \"s3://kbo-nlped-data/d-2018/12/\"\ndoosan_paths \u003d [\"01/17/\", \"02/08/\", \"02/09/\"]\n\ndf_doosan \u003d None\nfor idx, path in enumerate(doosan_paths):\n    df_tmp \u003d spark.read.json(prefix + path)\n    if (idx \u003d\u003d 0):\n        df_doosan \u003d df_tmp\n    else:\n        df_doosan \u003d df_doosan.union(df_tmp)\n        \ndf_doosan.printSchema()\ndf_doosan.createOrReplaceTempView(\"doosan\")\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 9:37:00 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543739102086_-1832662121",
+      "id": "20181202-082502_397512205",
+      "dateCreated": "Dec 2, 2018 8:25:02 AM",
+      "dateStarted": "Dec 2, 2018 9:37:00 AM",
+      "dateFinished": "Dec 2, 2018 9:37:01 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf_sk \u003d spark.read.json(\"s3://kbo-nlped-data/s-2018/12/02/09/\")\ndf_sk.printSchema()\ndf_sk.createOrReplaceTempView(\"sk\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:01:54 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543743538117_1947838935",
+      "id": "20181202-093858_1273588712",
+      "dateCreated": "Dec 2, 2018 9:38:58 AM",
+      "dateStarted": "Dec 2, 2018 10:01:40 AM",
+      "dateFinished": "Dec 2, 2018 10:01:50 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf_twitter \u003d spark.read.json(\"s3://kbo-nlped-data/t-2018/12/02/10/\")\ndf_twitter.printSchema()\ndf_twitter.createOrReplaceTempView(\"twitter\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:18:27 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- tweet: string (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543744907686_-5773128",
+      "id": "20181202-100147_1131187065",
+      "dateCreated": "Dec 2, 2018 10:01:47 AM",
+      "dateStarted": "Dec 2, 2018 10:18:27 AM",
+      "dateFinished": "Dec 2, 2018 10:18:35 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf_zumnews \u003d spark.read.json(\"s3://kbo-nlped-data/z-2018/12/02/10/\")\ndf_zumnews.printSchema()\ndf_zumnews.createOrReplaceTempView(\"zum\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:09:26 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- content: string (nullable \u003d true)\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543745012761_-1563835963",
+      "id": "20181202-100332_2103499772",
+      "dateCreated": "Dec 2, 2018 10:03:32 AM",
+      "dateStarted": "Dec 2, 2018 10:09:26 AM",
+      "dateFinished": "Dec 2, 2018 10:09:34 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, date FROM doosan LIMIT 100\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:30:14 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tword\tdate\ndoosang1080873\t진짜\t2018-11-02 23:41:35\ndoosang1080873\t솩충이들\t2018-11-02 23:41:35\ndoosang1080873\t문학\t2018-11-02 23:41:35\ndoosang1080873\t문학여포\t2018-11-02 23:41:35\ndoosang1080873\t여포\t2018-11-02 23:41:35\ndoosang1080897\t올해\t2018-11-02 23:42:45\ndoosang1080897\t열세\t2018-11-02 23:42:45\ndoosang1080897\t팀\t2018-11-02 23:42:45\ndoosang1080854\t내일\t2018-11-02 23:40:50\ndoosang1080854\t미\t2018-11-02 23:40:50\ndoosang1080854\t미데\t2018-11-02 23:40:50\ndoosang1080854\t데\t2018-11-02 23:40:50\ndoosang1080854\t시임\t2018-11-02 23:40:50\ndoosang1080647\t솩\t2018-11-02 23:30:57\ndoosang1080647\t응\t2018-11-02 23:30:57\ndoosang1080647\t린드\t2018-11-02 23:30:57\ndoosang1080647\t린드5점대\t2018-11-02 23:30:57\ndoosang1080647\t5\t2018-11-02 23:30:57\ndoosang1080647\t점\t2018-11-02 23:30:57\ndoosang1080647\t대\t2018-11-02 23:30:57\ndoosang1080647\t복용\t2018-11-02 23:30:57\ndoosang1080647\t복용찬5점\t2018-11-02 23:30:57\ndoosang1080647\t찬\t2018-11-02 23:30:57\ndoosang1080647\t유\t2018-11-02 23:30:57\ndoosang1080647\t유돼지8점\t2018-11-02 23:30:57\ndoosang1080647\t돼지\t2018-11-02 23:30:57\ndoosang1080647\t8\t2018-11-02 23:30:57\ndoosang1080647\t대\t2018-11-02 23:30:57\ndoosang1080726\t산\t2018-11-02 23:34:37\ndoosang1080726\t램\t2018-11-02 23:34:37\ndoosang1080726\t램덩크\t2018-11-02 23:34:37\ndoosang1080726\t덩크\t2018-11-02 23:34:37\ndoosang1080726\t북\t2018-11-02 23:34:37\ndoosang1080386\t신\t2018-11-02 23:24:35\ndoosang1080386\t신재영\t2018-11-02 23:24:35\ndoosang1080386\t재영\t2018-11-02 23:24:35\ndoosang1080386\t새끼\t2018-11-02 23:24:35\ndoosang1080639\t우리\t2018-11-02 23:30:34\ndoosang1080639\t솩\t2018-11-02 23:30:34\ndoosang1080639\t거\t2018-11-02 23:30:34\ndoosang1080543\t겆\t2018-11-02 23:27:35\ndoosang1080543\t투수\t2018-11-02 23:27:35\ndoosang1080677\t이날\t2018-11-02 23:32:19\ndoosang1080677\t복수\t2018-11-02 23:32:19\ndoosang1080677\t그날\t2018-11-02 23:32:19\ndoosang1080677\tㅅ\t2018-11-02 23:32:19\ndoosang1080677\tㅅㅂ\t2018-11-02 23:32:19\ndoosang1080677\tㅂ\t2018-11-02 23:32:19\ndoosang1080482\t\t2018-11-02 23:25:57\ndoosang1080869\t네이비\t2018-11-02 23:41:26\ndoosang1080869\t4.5\t2018-11-02 23:41:26\ndoosang1080869\t4.5실화\t2018-11-02 23:41:26\ndoosang1080869\t실화\t2018-11-02 23:41:26\ndoosang1080337\t솩\t2018-11-02 23:24:04\ndoosang1080337\t넼\t2018-11-02 23:24:04\ndoosang1080402\t애\t2018-11-02 23:24:51\ndoosang1080402\t애미\t2018-11-02 23:24:51\ndoosang1080402\t미\t2018-11-02 23:24:51\ndoosang1080402\t입김\t2018-11-02 23:24:51\ndoosang1081037\t11\t2018-11-02 23:53:03\ndoosang1081037\t11시\t2018-11-02 23:53:03\ndoosang1081037\t시\t2018-11-02 23:53:03\ndoosang1081037\t2\t2018-11-02 23:53:03\ndoosang1081037\t2시\t2018-11-02 23:53:03\ndoosang1080706\t므르브\t2018-11-02 23:33:34\ndoosang1080706\t점수\t2018-11-02 23:33:34\ndoosang1080706\t나\t2018-11-02 23:33:34\ndoosang1080706\t경기\t2018-11-02 23:33:34\ndoosang1081086\t4\t2018-11-02 23:57:22\ndoosang1081086\t4승\t2018-11-02 23:57:22\ndoosang1081086\t승\t2018-11-02 23:57:22\ndoosang1081086\t0\t2018-11-02 23:57:22\ndoosang1081086\t0패\t2018-11-02 23:57:22\ndoosang1081086\t패\t2018-11-02 23:57:22\ndoosang1081086\t셧아웃\t2018-11-02 23:57:22\ndoosang1081086\t산\t2018-11-02 23:57:22\ndoosang1080458\t우\t2018-11-02 23:25:36\ndoosang1080419\t탁구장\t2018-11-02 23:25:05\ndoosang1080419\t씨\t2018-11-02 23:25:05\ndoosang1080419\t발\t2018-11-02 23:25:05\ndoosang1080455\t병신\t2018-11-02 23:25:34\ndoosang1080455\t재앙\t2018-11-02 23:25:34\ndoosang1080455\t댓가\t2018-11-02 23:25:34\ndoosang1080455\t씨\t2018-11-02 23:25:34\ndoosang1080921\t유희\t2018-11-02 23:45:06\ndoosang1080921\t유희관은\t2018-11-02 23:45:06\ndoosang1080921\t관은\t2018-11-02 23:45:06\ndoosang1080921\t오프너\t2018-11-02 23:45:06\ndoosang1080921\t제격\t2018-11-02 23:45:06\ndoosang1080738\t이번\t2018-11-02 23:34:53\ndoosang1080738\t코시\t2018-11-02 23:34:53\ndoosang1080738\t돔\t2018-11-02 23:34:53\ndoosang1080330\t깈\t2018-11-02 23:24:02\ndoosang1080493\t장\t2018-11-02 23:26:22\ndoosang1080493\t장바지\t2018-11-02 23:26:22\ndoosang1080493\t바지\t2018-11-02 23:26:22\ndoosang1080493\t병신\t2018-11-02 23:26:22\ndoosang1080493\t병신새끼\t2018-11-02 23:26:22\ndoosang1080493\t새끼\t2018-11-02 23:26:22\ndoosang1080493\t투수\t2018-11-02 23:26:22\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543746598591_1427069526",
+      "id": "20181202-102958_1652050793",
+      "dateCreated": "Dec 2, 2018 10:29:58 AM",
+      "dateStarted": "Dec 2, 2018 10:30:14 AM",
+      "dateFinished": "Dec 2, 2018 10:30:14 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, date FROM sk",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:31:25 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 278.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {
+                  "stacked": false
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "id",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "word",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tword\tdate\nskg7306631\t긍정\t2018-11-07 19:55:48\nskg7306631\t충\t2018-11-07 19:55:48\nskg7306631\t지금\t2018-11-07 19:55:48\nskg7306631\t다행\t2018-11-07 19:55:48\nskg7266304\t긍정\t2018-11-04 12:51:02\nskg7266304\t충\t2018-11-04 12:51:02\nskg7266304\t장원준\t2018-11-04 12:51:02\nskg7266304\t병\t2018-11-04 12:51:02\nskg7266304\t대타\t2018-11-04 12:51:02\nskg7266304\t가능\t2018-11-04 12:51:02\nskg7298559\t솩갤\t2018-11-06 14:47:44\nskg7298559\t최정\t2018-11-06 14:47:44\nskg7298559\t마음\t2018-11-06 14:47:44\nskg7304021\t진짜\t2018-11-07 19:10:42\nskg7304021\t사\t2018-11-07 19:10:42\nskg7304021\t해설\t2018-11-07 19:10:42\nskg7304021\t시방\t2018-11-07 19:10:42\nskg7304021\t새\t2018-11-07 19:10:42\nskg7304021\t제일\t2018-11-07 19:10:42\nskg7304021\t낫\t2018-11-07 19:10:42\nskg7318880\t실시간\t2018-11-08 15:19:45\nskg7318880\t문학\t2018-11-08 15:19:45\nskg7258155\t꼴\t2018-11-03 00:37:41\nskg7258155\t너\t2018-11-03 00:37:41\nskg7258155\t켈리\t2018-11-03 00:37:41\nskg7258155\t모자\t2018-11-03 00:37:41\nskg7258155\t모습\t2018-11-03 00:37:41\nskg7258155\t뭔가\t2018-11-03 00:37:41\nskg7258155\t움\t2018-11-03 00:37:41\nskg7317651\t여기\t2018-11-08 09:26:08\nskg7317651\t것\t2018-11-08 09:26:08\nskg7317651\t안눌림\t2018-11-08 09:26:08\nskg7319745\t제구\t2018-11-08 17:41:40\nskg7319745\t강지광\t2018-11-08 17:41:40\nskg7319745\t제구\t2018-11-08 17:41:40\nskg7319745\t엄정욱\t2018-11-08 17:41:40\nskg7269513\t띨\t2018-11-04 14:58:12\nskg7269513\t시발\t2018-11-04 14:58:12\nskg7269513\t년\t2018-11-04 14:58:12\nskg7257545\t당신\t2018-11-03 00:00:05\nskg7257545\t온\t2018-11-03 00:00:05\nskg7257545\t그\t2018-11-03 00:00:05\nskg7257545\t순간\t2018-11-03 00:00:05\nskg7259882\t씨발\t2018-11-03 03:35:06\nskg7259882\t놀이\t2018-11-03 03:35:06\nskg7259882\t항상\t2018-11-03 03:35:06\nskg7259882\t스트레스\t2018-11-03 03:35:06\nskg7257460\t갓\t2018-11-02 23:56:43\nskg7257460\t택형\t2018-11-02 23:56:43\nskg7257460\t칭찬\t2018-11-02 23:56:43\nskg7257460\t재앙\t2018-11-02 23:56:43\nskg7257460\t똥\t2018-11-02 23:56:43\nskg7257460\t안\t2018-11-02 23:56:43\nskg7284590\t린\t2018-11-05 14:39:27\nskg7284590\t투구\t2018-11-05 14:39:27\nskg7284590\t폼\t2018-11-05 14:39:27\nskg7284590\t왜\t2018-11-05 14:39:27\nskg7287432\t문덕스\t2018-11-05 19:08:16\nskg7287432\t올해\t2018-11-05 19:08:16\nskg7287432\t퐈였으\t2018-11-05 19:08:16\nskg7287432\t최소\t2018-11-05 19:08:16\nskg7320942\t최정\t2018-11-08 22:54:04\nskg7320942\t밑살\t2018-11-08 22:54:04\nskg7302211\t수팡\t2018-11-07 17:14:58\nskg7302211\t우승\t2018-11-07 17:14:58\nskg7302211\t반지\t2018-11-07 17:14:58\nskg7302211\t못\t2018-11-07 17:14:58\nskg7341332\t타자\t2018-11-10 15:14:01\nskg7341332\t바깥쪽\t2018-11-10 15:14:01\nskg7341332\t공\t2018-11-10 15:14:01\nskg7341332\t붕붕\t2018-11-10 15:14:01\nskg7341332\t쩌\t2018-11-10 15:14:01\nskg7335831\t시발\t2018-11-09 23:30:18\nskg7335831\t최정\t2018-11-09 23:30:18\nskg7335831\t시발\t2018-11-09 23:30:18\nskg7335831\t코시\t2018-11-09 23:30:18\nskg7335831\t시발\t2018-11-09 23:30:18\nskg7283861\t오늘\t2018-11-05 11:25:27\nskg7283861\t지면\t2018-11-05 11:25:27\nskg7283861\t코시\t2018-11-05 11:25:27\nskg7283861\t봄\t2018-11-05 11:25:27\nskg7286856\t구나\t2018-11-05 18:54:31\nskg7286856\t봄\t2018-11-05 18:54:31\nskg7332250\t애\t2018-11-09 21:12:42\nskg7332250\t미수\t2018-11-09 21:12:42\nskg7332250\t갑존\t2018-11-09 21:12:42\nskg7272652\t힐\t2018-11-04 16:09:35\nskg7272652\t우승\t2018-11-04 16:09:35\nskg7272652\t다르빗슈\t2018-11-04 16:09:35\nskg7272652\t빨\t2018-11-04 16:09:35\nskg7272652\t크보\t2018-11-04 16:09:35\nskg7272652\t기전\t2018-11-04 16:09:35\nskg7272652\t투\t2018-11-04 16:09:35\nskg7272652\t교보\t2018-11-04 16:09:35\nskg7272652\t노답\t2018-11-04 16:09:35\nskg7272652\t임\t2018-11-04 16:09:35\nskg7276579\t\t2018-11-04 17:22:57\nskg7355917\t일\t2018-11-11 23:57:06\nskg7355917\t표살\t2018-11-11 23:57:06\nskg7288518\t돡\t2018-11-05 19:35:32\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543746625708_-252546602",
+      "id": "20181202-103025_1521180237",
+      "dateCreated": "Dec 2, 2018 10:30:25 AM",
+      "dateStarted": "Dec 2, 2018 10:30:33 AM",
+      "dateFinished": "Dec 2, 2018 10:30:33 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect recordId as id, EXPLODE(SPLIT(tweet, \u0027[|]\u0027)) as tweet, date from twitter limit 100",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:29:21 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\ttweet\tdate\ntwitter1060667372271427584\t한국\t2018-11-08 22:56:22\ntwitter1060667372271427584\t시리즈\t2018-11-08 22:56:22\ntwitter1060667372271427584\t시구\t2018-11-08 22:56:22\ntwitter1060667372271427584\t성악가\t2018-11-08 22:56:22\ntwitter1060667372271427584\t폴\t2018-11-08 22:56:22\ntwitter1060667372271427584\t포츠\t2018-11-08 22:56:22\ntwitter1060667372271427584\t애국가\t2018-11-08 22:56:22\ntwitter1060667372271427584\t정인\t2018-11-08 22:56:22\ntwitter1059034258788900864\t한국\t2018-11-04 10:46:57\ntwitter1059034258788900864\t시리즈\t2018-11-04 10:46:57\ntwitter1059034258788900864\t와이번스\t2018-11-04 10:46:57\ntwitter1059034258788900864\t두산\t2018-11-04 10:46:57\ntwitter1059034258788900864\t베어스\t2018-11-04 10:46:57\ntwitter1059034258788900864\t상대로\t2018-11-04 10:46:57\ntwitter1059034258788900864\t승\t2018-11-04 10:46:57\ntwitter1062062597682294784\t영화\t2018-11-12 19:20:30\ntwitter1062062597682294784\t택시\t2018-11-12 19:20:30\ntwitter1062062597682294784\t드라이버\t2018-11-12 19:20:30\ntwitter1062062597682294784\t차\t2018-11-12 19:20:30\ntwitter1062062597682294784\t만해\t2018-11-12 19:20:30\ntwitter1061132385448747008\t얘\t2018-11-10 05:44:10\ntwitter1061132385448747008\t우취\t2018-11-10 05:44:10\ntwitter1061132385448747008\t때\t2018-11-10 05:44:10\ntwitter1061132385448747008\t뭐\t2018-11-10 05:44:10\ntwitter1061132385448747008\t타격\t2018-11-10 05:44:10\ntwitter1061132385448747008\t망\t2018-11-10 05:44:10\ntwitter1061132385448747008\t인걸\t2018-11-10 05:44:10\ntwitter1062123291232559106\t일부\t2018-11-12 23:21:40\ntwitter1062123291232559106\t선수\t2018-11-12 23:21:40\ntwitter1062123291232559106\t각성\t2018-11-12 23:21:40\ntwitter1062123291232559106\t프런트\t2018-11-12 23:21:40\ntwitter1062123291232559106\t정신차려라\t2018-11-12 23:21:40\ntwitter1062123291232559106\t감독\t2018-11-12 23:21:40\ntwitter1062123291232559106\t돌\t2018-11-12 23:21:40\ntwitter1062123291232559106\t머리\t2018-11-12 23:21:40\ntwitter1062123291232559106\t소리\t2018-11-12 23:21:40\ntwitter1062123291232559106\t팬\t2018-11-12 23:21:40\ntwitter1062123291232559106\t그냥\t2018-11-12 23:21:40\ntwitter1062123291232559106\t냄비\t2018-11-12 23:21:40\ntwitter1062123291232559106\t원래\t2018-11-12 23:21:40\ntwitter1062123291232559106\t팀팬\t2018-11-12 23:21:40\ntwitter1062123291232559106\t철새\t2018-11-12 23:21:40\ntwitter1062123291232559106\t코스프레\t2018-11-12 23:21:40\ntwitter1062123291232559106\t두산\t2018-11-12 23:21:40\ntwitter1062123291232559106\t잠깐\t2018-11-12 23:21:40\ntwitter1062125045428830208\t비아그라\t2018-11-12 23:28:38\ntwitter1062125045428830208\t가격\t2018-11-12 23:28:38\ntwitter1062125045428830208\t홈피\t2018-11-12 23:28:38\ntwitter1062125045428830208\t토토\t2018-11-12 23:28:38\ntwitter1062125045428830208\t김연경\t2018-11-12 23:28:38\ntwitter1062125045428830208\t레알마드리드\t2018-11-12 23:28:38\ntwitter1062125045428830208\t글로벌\t2018-11-12 23:28:38\ntwitter1062125045428830208\t투자\t2018-11-12 23:28:38\ntwitter1062125045428830208\t불가리\t2018-11-12 23:28:38\ntwitter1062125045428830208\t뉴옥\t2018-11-12 23:28:38\ntwitter1062125045428830208\t닉스\t2018-11-12 23:28:38\ntwitter1062125045428830208\t월드컵\t2018-11-12 23:28:38\ntwitter1061999750507970560\t작년\t2018-11-12 15:10:46\ntwitter1061999750507970560\t돡\t2018-11-12 15:10:46\ntwitter1061999750507970560\t감독\t2018-11-12 15:10:46\ntwitter1062107846983045120\t해\t2018-11-12 22:20:18\ntwitter1062107846983045120\t나름\t2018-11-12 22:20:18\ntwitter1062107846983045120\t솩\t2018-11-12 22:20:18\ntwitter1061767312728965122\t존웃\t2018-11-11 23:47:08\ntwitter1061767312728965122\t킹\t2018-11-11 23:47:08\ntwitter1061767312728965122\t데\t2018-11-11 23:47:08\ntwitter1061767312728965122\t거\t2018-11-11 23:47:08\ntwitter1061930874801803264\t회장\t2018-11-12 10:37:04\ntwitter1061930874801803264\t시발\t2018-11-12 10:37:04\ntwitter1061930874801803264\t좆\t2018-11-12 10:37:04\ntwitter1061930874801803264\t크보\t2018-11-12 10:37:04\ntwitter1061930874801803264\t좀\t2018-11-12 10:37:04\ntwitter1061930874801803264\t해\t2018-11-12 10:37:04\ntwitter1058864159314460672\t리키\t2018-11-03 23:31:02\ntwitter1058864159314460672\t안녕\t2018-11-03 23:31:02\ntwitter1058864159314460672\t오늘\t2018-11-03 23:31:02\ntwitter1058864159314460672\t화이팅\t2018-11-03 23:31:02\ntwitter1058728007823634434\t그림\t2018-11-03 14:30:01\ntwitter1058728007823634434\t저\t2018-11-03 14:30:01\ntwitter1058728007823634434\t밑\t2018-11-03 14:30:01\ntwitter1058728007823634434\t은애\t2018-11-03 14:30:01\ntwitter1058728007823634434\t렛\t2018-11-03 14:30:01\ntwitter1058728007823634434\t크보\t2018-11-03 14:30:01\ntwitter1058728007823634434\t바지\t2018-11-03 14:30:01\ntwitter1058728007823634434\t뉴\t2018-11-03 14:30:01\ntwitter1058728007823634434\t오토\t2018-11-03 14:30:01\ntwitter1058728007823634434\t날\t2018-11-03 14:30:01\ntwitter1058728007823634434\t저\t2018-11-03 14:30:01\ntwitter1058728007823634434\t녀석\t2018-11-03 14:30:01\ntwitter1058728007823634434\t말\t2018-11-03 14:30:01\ntwitter1058728007823634434\t트윗\t2018-11-03 14:30:01\ntwitter1058728007823634434\t그\t2018-11-03 14:30:01\ntwitter1058728007823634434\t때\t2018-11-03 14:30:01\ntwitter1058728007823634434\t크레이지\t2018-11-03 14:30:01\ntwitter1058728007823634434\t한유\t2018-11-03 14:30:01\ntwitter1058728007823634434\t헬싱키\t2018-11-03 14:30:01\ntwitter1058728007823634434\t그래도좋아\t2018-11-03 14:30:01\ntwitter1058728007823634434\t크레이지\t2018-11-03 14:30:01\ntwitter1058728007823634434\t차라리\t2018-11-03 14:30:01\ntwitter1058728007823634434\t한국팬\t2018-11-03 14:30:01\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543746542565_82079316",
+      "id": "20181202-102902_1029990884",
+      "dateCreated": "Dec 2, 2018 10:29:02 AM",
+      "dateStarted": "Dec 2, 2018 10:29:21 AM",
+      "dateFinished": "Dec 2, 2018 10:29:22 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT recordId as id, title, EXPLODE(SPLIT(content, \u0027[|]\u0027)) as content, date FROM zum LIMIT 100\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:28:19 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\ttitle\tcontent\tdate\nzumnews48666188\t몸|곰|군단|것|두산|힘\t매경닷컴\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t스포츠\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t잠실\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t이상철\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t기자\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t만이\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t몸\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t덜\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t오늘\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t것\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t한국\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시리즈\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t패배\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t두산\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t선수단\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t표정\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t연속\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t한국\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시리즈\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t오른\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t팀\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t여유\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t일지\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t심리\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t기전\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t승\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t길이\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t두산\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t정규\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시즌\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t종료\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t후\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t일본\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t미야자키\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t캠프\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t총\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t네\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t번의\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t실전\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t열\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시간\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t안타\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t개\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t볼넷\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t개\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t점\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t잔루\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t최주환\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t두산\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t의\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t프로야구\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t한국\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시리즈\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t홈런\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t친\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t후\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t사진\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t잠실\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t정환\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t기자\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t누구\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시간\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t것\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t패\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t실전\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t감각\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t무대\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t안성맞춤\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t게\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t두산\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t선수단\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t공통\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t의견\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t한국\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시리즈\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t승리\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t팀\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t우승\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t확률\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t이르렀다\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t최근\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t범위\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t패배\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t팀\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t오히려\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t정상\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t등\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t횟수\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t또한\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t긴장\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t끈\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t정규\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t시즌\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t승\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t두산\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t승률\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t이상\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t차이\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t김강민\t2018.11.05 21:45\nzumnews48666188\t몸|곰|군단|것|두산|힘\t두산\t2018.11.05 21:45\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543745598436_-516952296",
+      "id": "20181202-101318_1889248333",
+      "dateCreated": "Dec 2, 2018 10:13:18 AM",
+      "dateStarted": "Dec 2, 2018 10:28:19 AM",
+      "dateFinished": "Dec 2, 2018 10:28:19 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 10:27:23 AM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1543746443219_-801642935",
+      "id": "20181202-102723_1804179437",
+      "dateCreated": "Dec 2, 2018 10:27:23 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "kbo_spark_notebook",
+  "id": "2DXVWQ2Y3",
+  "angularObjects": {
+    "2BRWU4WXC:shared_process": [],
+    "2AM1YV5CU:shared_process": [],
+    "2AJXGMUUJ:shared_process": [],
+    "2ANGGHHMQ:shared_process": [],
+    "2AKK3QQXU:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
