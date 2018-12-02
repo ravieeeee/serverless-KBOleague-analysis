@@ -12,6 +12,7 @@
   * no module name: konlpy
     * [이슈](https://github.com/konlpy/konlpy/issues/71)를 보니 konlpy의 dependency인 Jpype가 문제가 있어서 람다가 안 돈다.
       * Jpype, Jpype1-py3, numpy 다 줘도 konlpy를 못찾는다 ^^..... 대체 왜
+        * Kkma: outOfMemory [참고](https://github.com/konlpy/konlpy/issues/93)
 ### EMR
   * 웹 연결 활성화(Amazon EMR 클러스터에 설치되는 애플리케이션은 마스터 노드에 호스팅된 웹 사이트로 사용자 인터페이스를 게시)를 위해 마스터 노드(EC2 인스턴스)에 대한 SSH 터널 열기 & 프록시 관리 도구 구성이 필요
     * EC2 key pair가 필요
@@ -85,8 +86,9 @@
   * dynamo는 Availability를 보장하는데, 이 프로젝트에는 그런 real-time을 보장받기 보다는 S3를 쓰는 것이 더 목적에 맞는 느낌..
     *  [AWS Glue와 S3를 이용한 아키텍쳐 사례](https://aws.amazon.com/blogs/big-data/build-a-data-lake-foundation-with-aws-glue-and-amazon-s3/)
     * 이외에도 보통 이런 목적에는 S3를 많이 쓰는 사례를 많이 찾아볼 수 있다.
-  * 그래도 dynamodb를 써봤다는 것에 만족!
+  * 그래도 dynamodb를 처음 써본 것으로 만족
 * 크롤러들 serverless 배포시 virtualenv 설정을 안했다!
   * 간단한데 왜 안했지 바보
 * kinesis가 stream으로 들어오는 데이터를 nlp해서 그걸 가지고 하둡을 돌리는 그런 구조를 생각했는데, konlpy가 올라가지 않아서 transforming하는 middleware가 그냥 받은 데이터 뱉기밖에 못한게 아쉽다.
-  * 프로젝트 주제 특성상, 이미 야구 시즌이 끝나서 더이상 크롤링하지 않기 때문에 원래 생각한 동적인 구조(스케쥴 걸어놓은 람다 -> kinesis firehose에서 streaming으로 nlp -> s3에 쌓기 -> MR)대로 흘러갈 수는 없지만, 틀은 그렇게 만들어보면서 재미있었다 :D
+  * 프로젝트 주제 특성상, 이미 야구 시즌이 끝나서 더이상 크롤링하지 않기 때문에 짜놓은 구조(스케쥴 걸어놓은 람다 -> kinesis firehose에서 streaming으로 nlp -> s3에 쌓기 -> MR)대로 흘러갈 수는 없지만, 틀은 그렇게 만들어보면서 재미있었다 :D
+  * ML을 알았더라면 더 많은걸 해볼 수 있었을듯
