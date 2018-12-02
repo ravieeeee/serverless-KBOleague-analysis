@@ -1,0 +1,78 @@
+{
+  "paragraphs": [
+    {
+      "title": "[Twitter] 키워드 top15",
+      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(tweet, \u0027[|]\u0027)) as word, fDate\n    FROM twitter\n)\nWHERE CHAR_LENGTH(word) \u003e 1\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 10",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 6:03:04 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n한국\t15\n시리즈\t14\n크보\t12\n두산\t10\n진짜\t7\n코시\t6\n선수\t6\n잠실\t6\n감독\t6\n두산베어스\t5\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768909740_-1121594127",
+      "id": "20181202-164149_1900621332",
+      "dateCreated": "Dec 2, 2018 4:41:49 PM",
+      "dateStarted": "Dec 2, 2018 4:41:52 PM",
+      "dateFinished": "Dec 2, 2018 4:42:04 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:41:52 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768912098_927578515",
+      "id": "20181202-164152_1913069694",
+      "dateCreated": "Dec 2, 2018 4:41:52 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "kbo_twitter",
+  "id": "2DWCG54ZU",
+  "angularObjects": {
+    "2BRWU4WXC:shared_process": [],
+    "2AM1YV5CU:shared_process": [],
+    "2AJXGMUUJ:shared_process": [],
+    "2ANGGHHMQ:shared_process": [],
+    "2AKK3QQXU:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

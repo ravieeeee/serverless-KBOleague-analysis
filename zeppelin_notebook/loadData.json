@@ -1,0 +1,248 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\nfrom pyspark.sql import SparkSession\nfrom pyspark import SparkContext\nfrom pyspark.sql.types import DateType, TimestampType\nimport pyspark.sql.functions as F\n\nspark \u003d SparkSession.builder.appName(\"kbo\").getOrCreate()\nsc \u003d spark.sparkContext\n\nprefix \u003d \"s3://kbo-nlped-data/d-2018/12/\"\ndoosan_paths \u003d [\"01/17/\", \"02/08/\", \"02/09/\"]\n\ndf_doosan \u003d None\nfor idx, path in enumerate(doosan_paths):\n    df_tmp \u003d spark.read.json(prefix + path)\n    if (idx \u003d\u003d 0):\n        df_doosan \u003d df_tmp\n    else:\n        df_doosan \u003d df_doosan.union(df_tmp)\n        \ndf_doosan \u003d df_doosan.withColumn(\"fDate\", F.to_date(df_doosan.date))\n\ndf_doosan.printSchema()\ndf_doosan.createOrReplaceTempView(\"doosan\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:26:06 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- fDate: date (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543767951704_-2082462607",
+      "id": "20181202-162551_1573415131",
+      "dateCreated": "Dec 2, 2018 4:25:51 PM",
+      "dateStarted": "Dec 2, 2018 4:26:06 PM",
+      "dateFinished": "Dec 2, 2018 4:26:16 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf_sk \u003d spark.read.json(\"s3://kbo-nlped-data/s-2018/12/02/09/\")\ndf_sk \u003d df_sk.withColumn(\"fDate\", F.to_date(df_sk.date))\n\ndf_sk.printSchema()\ndf_sk.createOrReplaceTempView(\"sk\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:26:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n |-- fDate: date (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543767966032_-581141750",
+      "id": "20181202-162606_1919560979",
+      "dateCreated": "Dec 2, 2018 4:26:06 PM",
+      "dateStarted": "Dec 2, 2018 4:26:41 PM",
+      "dateFinished": "Dec 2, 2018 4:26:41 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf_twitter \u003d spark.read.json(\"s3://kbo-nlped-data/t-2018/12/02/10/\")\ndf_twitter \u003d df_twitter.withColumn(\"fDate\", F.to_date(df_twitter.date))\n\ndf_twitter.printSchema()\ndf_twitter.createOrReplaceTempView(\"twitter\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:27:02 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- tweet: string (nullable \u003d true)\n |-- fDate: date (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768001057_-915241713",
+      "id": "20181202-162641_195307612",
+      "dateCreated": "Dec 2, 2018 4:26:41 PM",
+      "dateStarted": "Dec 2, 2018 4:27:02 PM",
+      "dateFinished": "Dec 2, 2018 4:27:03 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\ndf_zumnews \u003d spark.read.json(\"s3://kbo-nlped-data/z-2018/12/02/10/\")\n\ndf_zumnews.printSchema()\ndf_zumnews.createOrReplaceTempView(\"zum\")",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:50:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- content: string (nullable \u003d true)\n |-- date: string (nullable \u003d true)\n |-- recordId: string (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768022773_-1712810859",
+      "id": "20181202-162702_1521119503",
+      "dateCreated": "Dec 2, 2018 4:27:02 PM",
+      "dateStarted": "Dec 2, 2018 4:50:35 PM",
+      "dateFinished": "Dec 2, 2018 4:50:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nSELECT (SELECT count(*) FROM doosan) AS dc_doosan_gallery, (SELECT count(*) FROM sk) as dc_sk_gallery, (SELECT count(*) FROM twitter) as twitter, (SELECT count(*) FROM zum) as zumnews",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:31:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "pieChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "pieChart": {}
+              },
+              "commonSetting": {},
+              "keys": [],
+              "groups": [],
+              "values": [
+                {
+                  "name": "dc_doosan_gallery",
+                  "index": 0.0,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "dc_sk_gallery",
+                  "index": 1.0,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "twitter",
+                  "index": 2.0,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "zumnews",
+                  "index": 3.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "dc_doosan_gallery\tdc_sk_gallery\ttwitter\tzumnews\n3126\t2607\t90\t287\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768036204_219813515",
+      "id": "20181202-162716_1568820355",
+      "dateCreated": "Dec 2, 2018 4:27:16 PM",
+      "dateStarted": "Dec 2, 2018 4:31:12 PM",
+      "dateFinished": "Dec 2, 2018 4:31:13 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:31:12 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768272204_-1385618884",
+      "id": "20181202-163112_917537689",
+      "dateCreated": "Dec 2, 2018 4:31:12 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "kbo_load_data",
+  "id": "2DZ2YYB9U",
+  "angularObjects": {
+    "2BRWU4WXC:shared_process": [],
+    "2AM1YV5CU:shared_process": [],
+    "2AJXGMUUJ:shared_process": [],
+    "2ANGGHHMQ:shared_process": [],
+    "2AKK3QQXU:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

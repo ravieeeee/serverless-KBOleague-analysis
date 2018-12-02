@@ -1,0 +1,381 @@
+{
+  "paragraphs": [
+    {
+      "title": "[SK] 날짜별 우승 키워드 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE word LIKE \"%우승%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:56:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-02\t2\n2018-11-03\t3\n2018-11-04\t8\n2018-11-05\t6\n2018-11-06\t1\n2018-11-07\t4\n2018-11-08\t3\n2018-11-09\t4\n2018-11-10\t10\n2018-11-11\t3\n2018-11-12\t7\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768310573_-1653911460",
+      "id": "20181202-163150_435112765",
+      "dateCreated": "Dec 2, 2018 4:31:50 PM",
+      "dateStarted": "Dec 2, 2018 4:32:13 PM",
+      "dateFinished": "Dec 2, 2018 4:32:14 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 날짜별 상대팀 언급 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE (word LIKE \"%돡%\" or word LIKE \"%두산%\" or word LIKE \"%범두%\" or word LIKE \"%범%\" or word LIKE \"%범죄두%\" or word LIKE \"%씹돡%\" or word LIKE \"%잠실%\")\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:57:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-02\t1\n2018-11-03\t15\n2018-11-04\t30\n2018-11-05\t27\n2018-11-06\t11\n2018-11-07\t19\n2018-11-08\t9\n2018-11-09\t13\n2018-11-10\t9\n2018-11-11\t11\n2018-11-12\t10\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768333092_-1295310161",
+      "id": "20181202-163213_804323565",
+      "dateCreated": "Dec 2, 2018 4:32:13 PM",
+      "dateStarted": "Dec 2, 2018 4:32:44 PM",
+      "dateFinished": "Dec 2, 2018 4:32:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 날짜별 우취 키워드 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE word LIKE \"%우취%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:58:31 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-07\t1\n2018-11-08\t5\n2018-11-10\t1\n2018-11-11\t1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768364505_-1961649284",
+      "id": "20181202-163244_1025983731",
+      "dateCreated": "Dec 2, 2018 4:32:44 PM",
+      "dateStarted": "Dec 2, 2018 4:33:52 PM",
+      "dateFinished": "Dec 2, 2018 4:34:07 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 키워드 top15",
+      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE CHAR_LENGTH(word) \u003e 1\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:58:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n오늘\t136\n씨발\t112\n새끼\t98\n진짜\t91\n시발\t85\n정권\t58\n존나\t57\n최정\t54\n코시\t53\n우리\t53\n우승\t50\n병신\t49\n수비\t48\n경기\t43\n문학\t42\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768739212_530488647",
+      "id": "20181202-163859_484752767",
+      "dateCreated": "Dec 2, 2018 4:38:59 PM",
+      "dateStarted": "Dec 2, 2018 4:39:15 PM",
+      "dateFinished": "Dec 2, 2018 4:39:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 키워드 top15 순화버전",
+      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE CHAR_LENGTH(word) \u003e 1 and word !\u003d \"새끼\" and word !\u003d \"시발\" and word !\u003d \"씨발\" and word !\u003d \"병신\" and word !\u003d \"ㅅㅂ\" and word NOT LIKE \"%좆%\"\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:59:39 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n오늘\t136\n진짜\t91\n정권\t58\n존나\t57\n최정\t54\n우리\t53\n코시\t53\n우승\t50\n수비\t48\n경기\t43\n문학\t42\n내일\t40\n산체스\t37\n홈런\t35\n투수\t35\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768727361_-446419459",
+      "id": "20181202-163847_623181158",
+      "dateCreated": "Dec 2, 2018 4:38:47 PM",
+      "dateStarted": "Dec 2, 2018 4:39:18 PM",
+      "dateFinished": "Dec 2, 2018 4:39:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 날짜별 박정권 선수 키워드 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE word LIKE \"%정권%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 6:00:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-03\t1\n2018-11-04\t27\n2018-11-05\t10\n2018-11-06\t4\n2018-11-07\t11\n2018-11-09\t17\n2018-11-10\t11\n2018-11-11\t2\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768431964_-1634753925",
+      "id": "20181202-163351_637403766",
+      "dateCreated": "Dec 2, 2018 4:33:51 PM",
+      "dateStarted": "Dec 2, 2018 4:39:31 PM",
+      "dateFinished": "Dec 2, 2018 4:39:42 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 박정권 선수에겐 무슨일이..?",
+      "text": "%sql\nSELECT word, count(*) AS cnt\nFROM (\n    SELECT EXPLODE(SPLIT(content, \u0027[|]\u0027)) as word\n    FROM (\n        SELECT recordId, date, title, content\n        FROM zum\n        WHERE title LIKE \"%정권%\" or content LIKE \"%정권%\"\n        ORDER BY date\n    )\n)\nWHERE CHAR_LENGTH(word) \u003e 1\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:49:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "stackedAreaChart": {
+                  "style": "stack"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "word",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "cnt",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n시리즈\t89\n두산\t88\n한국\t77\n홈런\t56\n박정권\t54\n경기\t48\n우승\t34\n기자\t33\n승리\t28\n포스트시즌\t26\n서울\t23\n베어스\t22\n와이번스\t22\n시즌\t19\n역전\t19\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768760179_-174356014",
+      "id": "20181202-163920_699395710",
+      "dateCreated": "Dec 2, 2018 4:39:20 PM",
+      "dateStarted": "Dec 2, 2018 5:38:09 PM",
+      "dateFinished": "Dec 2, 2018 5:38:25 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:45:22 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1543772722727_1993868423",
+      "id": "20181202-174522_1674219319",
+      "dateCreated": "Dec 2, 2018 5:45:22 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "kbo_sk",
+  "id": "2DWUVGA4N",
+  "angularObjects": {
+    "2BRWU4WXC:shared_process": [],
+    "2AM1YV5CU:shared_process": [],
+    "2AJXGMUUJ:shared_process": [],
+    "2ANGGHHMQ:shared_process": [],
+    "2AKK3QQXU:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

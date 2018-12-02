@@ -1,0 +1,381 @@
+{
+  "paragraphs": [
+    {
+      "title": "[두산] 날짜별 우승 키워드 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE word LIKE \"%우승%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:56:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-02\t1\n2018-11-03\t3\n2018-11-04\t17\n2018-11-05\t11\n2018-11-06\t1\n2018-11-07\t13\n2018-11-08\t10\n2018-11-09\t23\n2018-11-10\t9\n2018-11-11\t10\n2018-11-12\t6\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543767884270_2009449215",
+      "id": "20181202-162444_1372289526",
+      "dateCreated": "Dec 2, 2018 4:24:44 PM",
+      "dateStarted": "Dec 2, 2018 4:24:55 PM",
+      "dateFinished": "Dec 2, 2018 4:24:59 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[두산] 날짜별 상대팀 언급 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE (word LIKE \"%sk%\" or word LIKE \"%솩%\" or word LIKE \"%씹솩%\" or word LIKE \"%문학%\" or word LIKE \"%슼%\")\nGROUP BY fDate\nORDER BY fDate\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:58:00 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-02\t9\n2018-11-03\t20\n2018-11-04\t29\n2018-11-05\t15\n2018-11-06\t7\n2018-11-07\t12\n2018-11-08\t5\n2018-11-09\t7\n2018-11-10\t13\n2018-11-11\t6\n2018-11-12\t9\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543767895727_-1019678875",
+      "id": "20181202-162455_1376297573",
+      "dateCreated": "Dec 2, 2018 4:24:55 PM",
+      "dateStarted": "Dec 2, 2018 4:27:38 PM",
+      "dateFinished": "Dec 2, 2018 4:27:44 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[두산] 날짜별 우취 키워드 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE word LIKE \"%우취%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:58:55 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-06\t2\n2018-11-07\t1\n2018-11-08\t4\n2018-11-11\t1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768058167_1982595058",
+      "id": "20181202-162738_1081767095",
+      "dateCreated": "Dec 2, 2018 4:27:38 PM",
+      "dateStarted": "Dec 2, 2018 4:28:36 PM",
+      "dateFinished": "Dec 2, 2018 4:28:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[두산] 키워드 top15",
+      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE CHAR_LENGTH(word) \u003e 1\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:00:12 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n새끼\t156\n시발\t117\n오늘\t109\n씨발\t86\n우승\t75\n코시\t65\n병신\t61\n내일\t58\n우리\t56\n진짜\t56\n경기\t52\n박건우\t48\nㅅㅂ\t48\n건우\t45\n좆건좆\t40\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768116013_798753864",
+      "id": "20181202-162836_1170406664",
+      "dateCreated": "Dec 2, 2018 4:28:36 PM",
+      "dateStarted": "Dec 2, 2018 4:29:18 PM",
+      "dateFinished": "Dec 2, 2018 4:29:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[두산] 키워드 top15 순화버전",
+      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE CHAR_LENGTH(word) \u003e 1 and word !\u003d \"새끼\" and word !\u003d \"시발\" and word !\u003d \"씨발\" and word !\u003d \"병신\" and word !\u003d \"ㅅㅂ\" and word NOT LIKE \"%좆%\"\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:00:21 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n오늘\t109\n우승\t75\n코시\t65\n내일\t58\n진짜\t56\n우리\t56\n경기\t52\n박건우\t48\n건우\t45\n야구\t38\n안타\t35\n문학\t34\n홈런\t33\n하나\t33\n직관\t32\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768158602_-1026448946",
+      "id": "20181202-162918_1545530556",
+      "dateCreated": "Dec 2, 2018 4:29:18 PM",
+      "dateStarted": "Dec 2, 2018 4:29:47 PM",
+      "dateFinished": "Dec 2, 2018 4:29:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[두산] 날짜별 박건우 선수 키워드 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE word LIKE \"%건우%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:01:33 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-04\t13\n2018-11-05\t14\n2018-11-07\t24\n2018-11-08\t5\n2018-11-09\t10\n2018-11-10\t24\n2018-11-11\t4\n2018-11-12\t8\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768187197_802139983",
+      "id": "20181202-162947_205683642",
+      "dateCreated": "Dec 2, 2018 4:29:47 PM",
+      "dateStarted": "Dec 2, 2018 4:30:25 PM",
+      "dateFinished": "Dec 2, 2018 4:30:27 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[두산] 박건우 선수에겐 무슨일이..?",
+      "text": "%sql\nSELECT word, count(*) AS cnt\nFROM (\n    SELECT EXPLODE(SPLIT(content, \u0027[|]\u0027)) as word\n    FROM (\n        SELECT recordId, date, title, content\n        FROM zum\n        WHERE title LIKE \"%건우%\" or content LIKE \"%건우%\"\n        ORDER BY date\n    )\n)\nWHERE CHAR_LENGTH(word) \u003e 1\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 5:23:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "stackedAreaChart": {
+                  "style": "stack"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "word",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "cnt",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "word\tcnt\n두산\t83\n시리즈\t52\n경기\t44\n한국\t42\n타자\t32\n홈런\t29\n안타\t25\n인천\t24\n기자\t24\n선발\t24\n박건우\t21\n감독\t21\n김재환\t19\n루수\t17\n승리\t16\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1543768225511_1988366815",
+      "id": "20181202-163025_1820868800",
+      "dateCreated": "Dec 2, 2018 4:30:25 PM",
+      "dateStarted": "Dec 2, 2018 5:12:17 PM",
+      "dateFinished": "Dec 2, 2018 5:12:32 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "Dec 2, 2018 4:53:07 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1543769587787_1198066859",
+      "id": "20181202-165307_936795501",
+      "dateCreated": "Dec 2, 2018 4:53:07 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "kbo_doosan",
+  "id": "2DZ331B6F",
+  "angularObjects": {
+    "2BRWU4WXC:shared_process": [],
+    "2AM1YV5CU:shared_process": [],
+    "2AJXGMUUJ:shared_process": [],
+    "2ANGGHHMQ:shared_process": [],
+    "2AKK3QQXU:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
