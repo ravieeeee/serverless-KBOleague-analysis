@@ -189,10 +189,57 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "[SK] 키워드 top15 순화버전",
-      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE CHAR_LENGTH(word) \u003e 1 and word !\u003d \"새끼\" and word !\u003d \"시발\" and word !\u003d \"씨발\" and word !\u003d \"병신\" and word !\u003d \"ㅅㅂ\" and word NOT LIKE \"%좆%\"\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "title": "[SK] 날짜별 비속어 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE word LIKE \"%씨발%\" or word LIKE \"%새끼%\" or word LIKE \"%시발%\" or word LIKE \"%존나%\" or word LIKE \"%병신%\"\nGROUP BY fDate\nORDER BY fDate",
       "user": "anonymous",
-      "dateUpdated": "Dec 2, 2018 5:59:39 PM",
+      "dateUpdated": "Dec 6, 2018 3:45:16 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-02\t5\n2018-11-03\t15\n2018-11-04\t76\n2018-11-05\t66\n2018-11-06\t8\n2018-11-07\t70\n2018-11-08\t8\n2018-11-09\t75\n2018-11-10\t49\n2018-11-11\t10\n2018-11-12\t37\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1544110959214_-265616943",
+      "id": "20181206-154239_113976703",
+      "dateCreated": "Dec 6, 2018 3:42:39 PM",
+      "dateStarted": "Dec 6, 2018 3:43:20 PM",
+      "dateFinished": "Dec 6, 2018 3:43:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "[SK] 키워드 top15 순화버전",
+      "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM sk\n)\nWHERE CHAR_LENGTH(word) \u003e 1 and word !\u003d \"새끼\" and word !\u003d \"시발\" and word !\u003d \"씨발\" and word !\u003d \"병신\" and word !\u003d \"ㅅㅂ\" and word NOT LIKE \"%좆%\" and word !\u003d \"존나\"\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
+      "user": "anonymous",
+      "dateUpdated": "Dec 6, 2018 3:45:32 PM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
@@ -222,7 +269,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "word\tcnt\n오늘\t136\n진짜\t91\n정권\t58\n존나\t57\n최정\t54\n우리\t53\n코시\t53\n우승\t50\n수비\t48\n경기\t43\n문학\t42\n내일\t40\n산체스\t37\n홈런\t35\n투수\t35\n"
+            "data": "word\tcnt\n오늘\t136\n진짜\t91\n정권\t58\n최정\t54\n우리\t53\n코시\t53\n우승\t50\n수비\t48\n경기\t43\n문학\t42\n내일\t40\n산체스\t37\n홈런\t35\n투수\t35\n선발\t33\n"
           }
         ]
       },
@@ -230,8 +277,8 @@
       "jobName": "paragraph_1543768727361_-446419459",
       "id": "20181202-163847_623181158",
       "dateCreated": "Dec 2, 2018 4:38:47 PM",
-      "dateStarted": "Dec 2, 2018 4:39:18 PM",
-      "dateFinished": "Dec 2, 2018 4:39:35 PM",
+      "dateStarted": "Dec 6, 2018 3:37:16 PM",
+      "dateFinished": "Dec 6, 2018 3:37:34 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

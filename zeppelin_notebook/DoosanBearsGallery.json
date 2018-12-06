@@ -189,6 +189,53 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "title": "[두산] 날짜별 비속어 빈도",
+      "text": "%sql\nSELECT fDate, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE word LIKE \"%새끼%\" or word LIKE \"%시발%\" or word LIKE \"%씨발%\" or word LIKE \"%병신%\" or word LIKE \"%ㅅㅂ%\" or word NOT LIKE \"%좆%\"\nGROUP BY fDate\nORDER BY fDate",
+      "user": "anonymous",
+      "dateUpdated": "Dec 6, 2018 3:50:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "fDate\tcnt\n2018-11-02\t138\n2018-11-03\t1149\n2018-11-04\t2692\n2018-11-05\t1584\n2018-11-06\t600\n2018-11-07\t2129\n2018-11-08\t795\n2018-11-09\t2449\n2018-11-10\t1456\n2018-11-11\t575\n2018-11-12\t767\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1544111359429_731614456",
+      "id": "20181206-154919_1938338295",
+      "dateCreated": "Dec 6, 2018 3:49:19 PM",
+      "dateStarted": "Dec 6, 2018 3:49:54 PM",
+      "dateFinished": "Dec 6, 2018 3:50:11 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "title": "[두산] 키워드 top15 순화버전",
       "text": "%sql\nSELECT word, count(*) as cnt\nFROM (\n    SELECT recordId as id, EXPLODE(SPLIT(title, \u0027[|]\u0027)) as word, title, fDate\n    FROM doosan\n)\nWHERE CHAR_LENGTH(word) \u003e 1 and word !\u003d \"새끼\" and word !\u003d \"시발\" and word !\u003d \"씨발\" and word !\u003d \"병신\" and word !\u003d \"ㅅㅂ\" and word NOT LIKE \"%좆%\"\nGROUP BY word\nORDER BY cnt DESC\nLIMIT 15",
       "user": "anonymous",
