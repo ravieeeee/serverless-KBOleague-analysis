@@ -1,3 +1,6 @@
+## 주제
+하둡 기반의 야구 커뮤니티 자연어 처리를 통한 2018 프로야구 우승 팀 분석 및 예측 시스템
+
 ## Architecture
 ![Structure](assets/structure.png)
 
@@ -84,11 +87,13 @@
 ## Retrospect
 * 크롤링 raw data를 s3에 넣을껄!
   * dynamo는 Availability를 보장하는데, 이 프로젝트에는 그런 real-time을 보장받기 보다는 S3를 쓰는 것이 더 목적에 맞는 느낌..
-    *  [AWS Glue와 S3를 이용한 아키텍쳐 사례](https://aws.amazon.com/blogs/big-data/build-a-data-lake-foundation-with-aws-glue-and-amazon-s3/)
+    * [AWS Glue와 S3를 이용한 아키텍쳐 사례](https://aws.amazon.com/blogs/big-data/build-a-data-lake-foundation-with-aws-glue-and-amazon-s3/)
     * 이외에도 보통 이런 목적에는 S3를 많이 쓰는 사례를 많이 찾아볼 수 있다.
   * 그래도 dynamodb를 처음 써본 것으로 만족
 * 크롤러들 serverless 배포시 virtualenv 설정을 안했다!
   * 간단한데 왜 안했지 바보
 * kinesis가 stream으로 들어오는 데이터를 nlp해서 그걸 가지고 하둡을 돌리는 그런 구조를 생각했는데, konlpy가 올라가지 않아서 transforming하는 middleware가 그냥 받은 데이터 뱉기밖에 못한게 아쉽다.
   * 프로젝트 주제 특성상, 이미 야구 시즌이 끝나서 더이상 크롤링하지 않기 때문에 짜놓은 구조(스케쥴 걸어놓은 람다 -> kinesis firehose에서 streaming으로 nlp -> s3에 쌓기 -> MR)대로 흘러갈 수는 없지만, 틀은 그렇게 만들어보면서 재미있었다 :D
-  * ML을 알았더라면 더 많은걸 해볼 수 있었을듯
+* Tokenization 이외에 좀 더 다양한 방식의 NLP를 해보면 좋았을 것 같다.
+  * 여기서 한 스텝만 더 밟아도 바로 ML을 알아야해서 주어진 시간 안에 도전하기가 어려웠다ㅜㅜ 아쉽
+* 제일 잘한 일 : 가진 크레딧 이상으로 과금하지 않았다
